@@ -3,7 +3,7 @@
 DROP TRIGGER IF EXISTS valid_email
 DELIMITER $$
 CREATE TRIGGER valid_email
-BEFORE UPDATE users
+BEFORE UPDATE ON users
 FOR EACH ROW
 BEGIN
     IF OLD.email != NEW.email then
