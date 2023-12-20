@@ -3,7 +3,7 @@
 
 import redis
 import uuid
-from typing import Union
+from typing import Union, Optional, Callable
 
 class Cache:
     """store instance od Redis"""
@@ -20,7 +20,16 @@ class Cache:
         self._redis.set(key, data)
 
         return key
+    
 
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+        """retrieve data from the cache based on a key"""
+        data = self._redis.get(key)
+
+        if data and fn:
+            return fn(data)
+        return data
 
     def get_str(self, key: str) -> int:
         """retrieve data as a string from the cache"""
