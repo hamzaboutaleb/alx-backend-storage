@@ -20,3 +20,13 @@ class Cache:
         self._redis.set(key, data)
 
         return key
+
+
+    def get_str(self, key: str) -> int:
+        """retrieve data as a string from the cache"""
+        return self.get(key, str)
+
+
+    def get_int(self, key: str) -> int:
+        """retrieve data as an integer from the cache"""
+        return self.get(key, int)
